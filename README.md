@@ -40,8 +40,8 @@ Read **Chapters 4-6** with an **especially careful read of Chapter 6**. Pay spec
 
 ## Relevant APIs to know about
 
-[System.IO.Path](https://docs.microsoft.com/en-us/dotnet/api/system.io.path) IF you find yourself using string operations to build up a file path, stop and look through the members of this static class.
+[System.IO.Path](https://docs.microsoft.com/dotnet/api/system.io.path) IF you find yourself using string operations to build up a file path, stop and look through the members of this static class.
 
-[System.IO.File](https://docs.microsoft.com/en-us/dotnet/api/system.io.file) A simple class that can handle simple file reads and writes.
+[System.IO.File](https://docs.microsoft.com/dotnet/api/system.io.file) A simple class that can handle simple file reads and writes.
 
-## See [Docs](https://github.com/IntelliTect-Samples/EWU-CSCD371-2023-Winter/blob/main/Docs/README.md)
+## See [Docs](./Docs/README.md)
