@@ -29,6 +29,7 @@ Read **Chapters 4-6** with an **especially careful read of Chapter 6**. Pay spec
 - Ensure you turn on Warnings as Errors (TreatWarningsAsErrors) ❌✔
 - Ensure that you turn on code analysis (EnableNETAnalyzers) ❌✔
 - Ensure that you turn on CodeAnalysisTreatWarningsAsErrors ❌✔
+- Ensure that you turn on EnforceCodeStyleInBuild ❌✔
 - Set `LangVersion` and the `TargetFramework` to the latest released versions available (preview versions optional) ❌✔
 - Turn on Nullability (`Nullable`) ❌✔
 - **All of the above should be unit tested.**
@@ -44,4 +45,4 @@ Read **Chapters 4-6** with an **especially careful read of Chapter 6**. Pay spec
 
 [System.IO.File](https://docs.microsoft.com/dotnet/api/system.io.file) A simple class that can handle simple file reads and writes.
 
-## See [Docs](./Docs/README.md)
+## See [Docs](https://github.com/IntelliTect-Samples/EWU-CSCD371-2024-Winter/blob/main/Docs/README.md)
