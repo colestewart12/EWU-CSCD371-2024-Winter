@@ -14,7 +14,7 @@ public class BaseLoggerMixinsTests
         // Arrange
 
         // Act
-        //BaseLoggerMixins.Error(null, "");
+        BaseLoggerMixins.Error(null, "");
 
         // Assert
     }
@@ -26,7 +26,7 @@ public class BaseLoggerMixinsTests
         var logger = new TestLogger();
 
         // Act
-        //logger.Error("Message {0}", 42);
+        logger.Error("Message {0}", 42);
 
         // Assert
         Assert.AreEqual(1, logger.LoggedMessages.Count);
@@ -34,6 +34,121 @@ public class BaseLoggerMixinsTests
         Assert.AreEqual("Message 42", logger.LoggedMessages[0].Message);
     }
 
+    [TestMethod]
+    public void Warning_WithData_LogsMessage()
+    {
+        //Arrange
+        TestLogger logger = new TestLogger();
+
+        //Act
+        BaseLoggerMixins.Warning(logger, "hello");
+
+        //Assert
+        Assert.AreEqual(1, logger.LoggedMessages.Count);
+        Assert.AreEqual(LogLevel.Warning, logger.LoggedMessages[0].LogLevel);
+        Assert.AreEqual("hello", logger.LoggedMessages[0].Message);
+
+    }
+
+    [TestMethod]
+    public void Warning_NullLogger_ThrowsException()
+    {
+        // Act and Assert
+        Assert.ThrowsException<ArgumentNullException>(() => BaseLoggerMixins.Warning(null, "Test warning message"));
+    }
+
+    [TestMethod]
+    public void Warning_WithArguments_LogsMessage()
+    {
+        //Arrange
+        TestLogger logger = new TestLogger();
+
+        //Act
+        BaseLoggerMixins.Warning(logger, "hello", ["arguments"]);
+
+        //Assert
+        Assert.AreEqual(1, logger.LoggedMessages.Count);
+        Assert.AreEqual(LogLevel.Warning, logger.LoggedMessages[0].LogLevel);
+        Assert.AreEqual("hello", logger.LoggedMessages[0].Message);
+    }
+
+    [TestMethod]
+    public void Information_WithData_LogsMessage()
+    {
+        //Arrange
+        TestLogger logger = new TestLogger();
+
+        //Act
+        BaseLoggerMixins.Information(logger, "hello", []);
+
+        //Assert
+        Assert.AreEqual(1, logger.LoggedMessages.Count);
+        Assert.AreEqual(LogLevel.Information, logger.LoggedMessages[0].LogLevel);
+        Assert.AreEqual("hello", logger.LoggedMessages[0].Message);
+
+    }
+
+    [TestMethod]
+    public void Information_NullLogger_ThrowsException()
+    {
+        // Act and Assert
+        Assert.ThrowsException<ArgumentNullException>(() => BaseLoggerMixins.Information(null, "Test warning message"));
+    }
+
+    [TestMethod]
+    public void Information_WithArguments_LogsMessage()
+    {
+        //Arrange
+        TestLogger logger = new TestLogger();
+
+        //Act
+        BaseLoggerMixins.Information(logger, "hello", ["arguments"]);
+
+        //Assert
+        Assert.AreEqual(1, logger.LoggedMessages.Count);
+        Assert.AreEqual(LogLevel.Information, logger.LoggedMessages[0].LogLevel);
+        Assert.AreEqual("hello", logger.LoggedMessages[0].Message);
+    }
+
+    [TestMethod]
+    public void Debug_WithData_LogsMessage()
+    {
+        //Arrange
+        TestLogger logger = new TestLogger();
+
+        //Act
+        BaseLoggerMixins.Debug(logger, "hello");
+
+        //Assert
+        Assert.AreEqual(1, logger.LoggedMessages.Count);
+        Assert.AreEqual(LogLevel.Debug, logger.LoggedMessages[0].LogLevel);
+        Assert.AreEqual("hello", logger.LoggedMessages[0].Message);
+
+    }
+
+    [TestMethod]
+    public void Debug_NullLogger_ThrowsException()
+    {
+        // Act and Assert
+        Assert.ThrowsException<ArgumentNullException>(() => BaseLoggerMixins.Debug(null, "Test warning message"));
+    }
+
+    [TestMethod]
+    public void Debug_WithArguments_LogsMessage()
+    {
+        //Arrange
+        TestLogger logger = new TestLogger();
+
+
+        //Act
+        BaseLoggerMixins.Debug(logger, "hello", ["arguments"]);
+
+
+        //Assert
+        Assert.AreEqual(1, logger.LoggedMessages.Count);
+        Assert.AreEqual(LogLevel.Debug, logger.LoggedMessages[0].LogLevel);
+        Assert.AreEqual("hello", logger.LoggedMessages[0].Message);
+    }
 }
 
 public class TestLogger : BaseLogger
