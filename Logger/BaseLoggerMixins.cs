@@ -24,7 +24,7 @@ public static class BaseLoggerMixins
         LogWithLevel(logger, LogLevel.Debug, message, args);
     }
 
-    public static System.Globalization.CultureInfo CurrentCulture { get; set; }
+    public static System.Globalization.CultureInfo? CurrentCulture { get; set; }
 
     private static void LogWithLevel(BaseLogger logger, LogLevel logLevel, string message, params object[] args)
     {

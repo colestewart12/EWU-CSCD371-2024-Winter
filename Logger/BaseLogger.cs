@@ -20,7 +20,7 @@ public class FileLogger : BaseLogger
         _fileName = fileName;
     }
 
-    public static System.Globalization.CultureInfo CurrentCulture { get; set; }
+    public static System.Globalization.CultureInfo? CurrentCulture { get; set; }
 
     public override void Log(LogLevel logLevel, string message)
     {
