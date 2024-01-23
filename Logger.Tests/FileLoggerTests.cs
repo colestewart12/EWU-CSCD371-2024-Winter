@@ -13,7 +13,7 @@ public class FileLoggerTests
         string filePath = "testFile.txt";
         string message = "Hello from file";
 
-        FileLogger filelog = new FileLogger(filePath);
+        var filelog = new FileLogger(filePath);
 
         filelog.Log(LogLevel.Warning, message);
 
