@@ -9,7 +9,7 @@ public class LogFactoryTests
     //MethodUnderTest_ConditionUnderTest_ExpectedResult
     public void CreateLogger_ValidPathString_LoggerCreatedAndReturned()
     {
-        LogFactory factory = new LogFactory();
+        var factory = new LogFactory();
         factory.ConfigureFileLogger("testpath.txt");
         Assert.IsNotNull(factory.CreateLogger());
     }
@@ -17,7 +17,7 @@ public class LogFactoryTests
     [TestMethod]
     public void CreateLogger_NoPathString_NullReturned()
     {
-        LogFactory factory = new LogFactory();
+        var factory = new LogFactory();
         Assert.IsNull(factory.CreateLogger());
     }
 
