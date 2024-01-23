@@ -38,7 +38,7 @@ public class BaseLoggerMixinsTests
     public void Warning_WithData_LogsMessage()
     {
         //Arrange
-        TestLogger logger = new TestLogger();
+        var logger = new TestLogger();
 
         //Act
         BaseLoggerMixins.Warning(logger, "hello");
@@ -61,7 +61,7 @@ public class BaseLoggerMixinsTests
     public void Warning_WithArguments_LogsMessage()
     {
         //Arrange
-        TestLogger logger = new TestLogger();
+        var logger = new TestLogger();
 
         //Act
         BaseLoggerMixins.Warning(logger, "hello", ["arguments"]);
@@ -76,7 +76,7 @@ public class BaseLoggerMixinsTests
     public void Information_WithData_LogsMessage()
     {
         //Arrange
-        TestLogger logger = new TestLogger();
+        var logger = new TestLogger();
 
         //Act
         BaseLoggerMixins.Information(logger, "hello", []);
@@ -99,7 +99,7 @@ public class BaseLoggerMixinsTests
     public void Information_WithArguments_LogsMessage()
     {
         //Arrange
-        TestLogger logger = new TestLogger();
+        var logger = new TestLogger();
 
         //Act
         BaseLoggerMixins.Information(logger, "hello", ["arguments"]);
@@ -114,7 +114,7 @@ public class BaseLoggerMixinsTests
     public void Debug_WithData_LogsMessage()
     {
         //Arrange
-        TestLogger logger = new TestLogger();
+        var logger = new TestLogger();
 
         //Act
         BaseLoggerMixins.Debug(logger, "hello");
@@ -137,7 +137,7 @@ public class BaseLoggerMixinsTests
     public void Debug_WithArguments_LogsMessage()
     {
         //Arrange
-        TestLogger logger = new TestLogger();
+        var logger = new TestLogger();
 
 
         //Act
