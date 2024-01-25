@@ -5,6 +5,9 @@
 		<IsPackable>false</IsPackable>
 		<LangVersion>12.0</LangVersion>
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
