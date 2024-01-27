@@ -1,13 +1,13 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Moq;
 using System;
 
-namespace CanHazFunny.Tests
+namespace CanHazFunny.Tests;
+
+
+public class JesterTests
 {
-    [TestClass]
-    public class JesterTests
-    {
-        [TestMethod]
+        [Fact]
         public void TellJoke_NormalData_SuccessfulReturn()
         {
             //Arrange
@@ -22,11 +22,11 @@ namespace CanHazFunny.Tests
             jester.TellJoke();
 
             //Assert
-            Assert.AreEqual("Normal joke", mockJokeOutput.Invocations[0].Arguments[0] as string);
+            Assert.Equal("Normal joke", mockJokeOutput.Invocations[0].Arguments[0] as string);
 
         }
 
-        [TestMethod]
+        [Fact]
         public void TellJoke_ChuckNorrisFirstNormalSecond_SuccessfulReturn()
         {
             //Arrange
@@ -42,22 +42,20 @@ namespace CanHazFunny.Tests
             jester.TellJoke();
 
             //Assert
-            Assert.AreEqual("Normal joke", mockJokeOutput.Invocations[0].Arguments[0] as string);
+            Assert.Equal("Normal joke", mockJokeOutput.Invocations[0].Arguments[0] as string);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public void TellJoke_NullJokeOutput_ThrowsException()
         {
             //Arrange
             IJokeOutput? nullJokeOutput = null;
             var mockJokeService = new Mock<IJokeService>();
 
-            var jester = new Jester(nullJokeOutput!, mockJokeService.Object);
+            Assert.Throws<ArgumentNullException>(() => new Jester(nullJokeOutput!, mockJokeService.Object));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [Fact]
         public void TellJoke_NullJokeService_ThrowsException()
         {
             //Arrange
@@ -65,6 +63,6 @@ namespace CanHazFunny.Tests
             var mockJokeOutput = new Mock<IJokeOutput>();
 
             var jester = new Jester(mockJokeOutput.Object, nullJokeService!);
+            Assert.Throws<ArgumentNullException>(() => new Jester(mockJokeOutput.Object, nullJokeService!));
         }
-    }
 }

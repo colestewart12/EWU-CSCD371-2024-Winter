@@ -1,13 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using System;
 using System.IO;
 
 namespace CanHazFunny.Tests
 {
-    [TestClass]
     public class ProgramTests
     {
-        [TestMethod]
+        [Fact]
         public void WriteJoke_WritesToConsole_SuccessfulReturn()
         {
             //Arrange
@@ -23,7 +22,7 @@ namespace CanHazFunny.Tests
 
             //Assert
             string consoleText = consoleOutput.ToString().Trim();
-            Assert.AreEqual(joke, consoleText);
+            Assert.Equal(joke, consoleText);
 
         }
     }
