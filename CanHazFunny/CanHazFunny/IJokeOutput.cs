@@ -1,9 +1,8 @@
 ﻿
 
-namespace CanHazFunny
+namespace CanHazFunny;
+
+public interface IJokeOutput
 {
-    public interface IJokeOutput
-    {
-        void WriteJoke(string joke);
-    }
+    void WriteJoke(string joke);
 }

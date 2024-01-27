@@ -1,14 +1,13 @@
-﻿namespace CanHazFunny
+﻿namespace CanHazFunny;
+
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
 
-            var OutputInstance = new JokeOutput();
-            var ServiceInstance = new JokeService();
+        var OutputInstance = new JokeOutput();
+        var ServiceInstance = new JokeService();
 
-            new Jester(OutputInstance, ServiceInstance).TellJoke();
-        }
+        new Jester(OutputInstance, ServiceInstance).TellJoke();
     }
 }
