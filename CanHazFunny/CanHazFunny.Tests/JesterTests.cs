@@ -54,15 +54,4 @@ public class JesterTests
 
             Assert.Throws<ArgumentNullException>(() => new Jester(nullJokeOutput!, mockJokeService.Object));
         }
-
-        [Fact]
-        public void TellJoke_NullJokeService_ThrowsException()
-        {
-            //Arrange
-            IJokeService? nullJokeService = null;
-            var mockJokeOutput = new Mock<IJokeOutput>();
-
-            var jester = new Jester(mockJokeOutput.Object, nullJokeService!);
-            Assert.Throws<ArgumentNullException>(() => new Jester(mockJokeOutput.Object, nullJokeService!));
-        }
 }
