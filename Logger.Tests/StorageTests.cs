@@ -4,10 +4,10 @@ namespace Logger.Tests;
 
 public class StorageTests
 {
-    private class TestEntity : IEntity
+    private sealed class TestEntity : IEntity
     {
         public Guid Id { get; init; }
-        public string Name { get; set; }
+        public required string Name { get; set; }
     }
 
     [Fact]
