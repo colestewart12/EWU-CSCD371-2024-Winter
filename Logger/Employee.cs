@@ -8,14 +8,7 @@ public record Employee : BaseEntity
     private FullName fullName = new("", null, "");
     protected override string GetName()
     {
-        StringBuilder result = new();
-        result.Append(fullName.FirstName);
-        if(fullName.MiddleName is not null)
-        {
-            result.Append(" " + fullName.MiddleName);
-        }
-        result.Append(" " + fullName.LastName);
-        return result.ToString();
+        return fullName.ToString();
     }
 
     protected override void SetName(string name)

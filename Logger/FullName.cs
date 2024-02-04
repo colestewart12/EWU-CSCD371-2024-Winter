@@ -1,4 +1,6 @@
-﻿namespace Logger;
+﻿using System.Text;
+
+namespace Logger;
 
 public record FullName
 {
@@ -17,5 +19,17 @@ public record FullName
         FirstName = firstName;
         MiddleName = null;
         LastName = lastName;
+    }
+   
+    public override string ToString()
+    {
+        StringBuilder result = new();
+        result.Append(FirstName);
+        if (MiddleName is not null)
+        {
+            result.Append(" " + MiddleName);
+        }
+        result.Append(" " + LastName);
+        return result.ToString();
     }
 }
