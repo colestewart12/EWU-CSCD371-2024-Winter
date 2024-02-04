@@ -11,7 +11,7 @@ public record FullName
     public FullName(string firstName, string? middleName, string lastName)
     {
         FirstName = firstName;
-        MiddleName = middleName ?? "";
+        MiddleName = middleName;
         LastName = lastName;
     }
     public FullName(string firstName, string lastName)
