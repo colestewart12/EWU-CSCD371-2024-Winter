@@ -20,10 +20,8 @@ public class Storage
     
     public IEntity? Get(Guid expectedGuid)
     {
-        return Entities.FirstOrDefault(entity => 
-        {
-            dynamic dynamicEntity = entity;
-            return dynamicEntity.Id == expectedGuid;
-        });
+        return Entities
+        .OfType<IEntity>()
+        .FirstOrDefault(entity => entity.Id == expectedGuid);
     }
 }
