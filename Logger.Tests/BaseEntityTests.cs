@@ -4,7 +4,7 @@ namespace Logger.Tests;
 
 public class BaseEntityTests
 {
-    private sealed class TestEntity : BaseEntity
+    private sealed record class TestEntity : BaseEntity
     {
         private string _name;
 

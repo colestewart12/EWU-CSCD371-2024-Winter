@@ -2,7 +2,7 @@
 
 namespace Logger;
 
-public abstract class BaseEntity : IEntity
+public abstract record class BaseEntity : IEntity
 {
     public Guid Id { get; init; }
 
