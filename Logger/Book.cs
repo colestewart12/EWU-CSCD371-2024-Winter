@@ -6,7 +6,7 @@ public record Book : IEntity
 {
     private FullName _author;
 
-    public Guid Id { get; init; } // Implementing Id property from IEntity interface
+    public Guid Id { get; init; }
 
     public string Author
     {
@@ -19,7 +19,7 @@ public record Book : IEntity
 
     public Book(string name, string author, int isbn)
     {
-        Id = Guid.NewGuid(); // Generating Id when constructing a new Book
+        Id = Guid.NewGuid();
         Name = name;
         _author = new(author);
         Isbn = isbn;
@@ -27,7 +27,7 @@ public record Book : IEntity
 
     public Book(string name, FullName author, int isbn)
     {
-        Id = Guid.NewGuid(); // Generating Id when constructing a new Book
+        Id = Guid.NewGuid();
         Name = name;
         _author = author;
         Isbn = isbn;
