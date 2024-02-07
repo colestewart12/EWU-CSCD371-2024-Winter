@@ -136,7 +136,8 @@ public class StorageTests
         var first = "First";
         var last = "Last";
         var name = new FullName(first, last);
-        var employee = new Employee(name, 1234567890);
+        var eid = 1234567890;
+        var employee = new Employee(name, eid);
         storage.Add(employee);
 
         //Act
@@ -159,5 +160,39 @@ public class StorageTests
 
         // Assert
         Assert.Equal(employee, returned);
+    }
+
+    [Fact]
+    public void AddandContains_StudentEntity_SuccessfullyAdded()
+    {
+        //Arrange
+        var storage = new Storage();
+        var student = new Student("Test Student", 1234567890);
+
+        //Act
+        storage.Add(student);
+
+        //Assert
+        Assert.True(storage.Contains(student));
+    }
+
+    [Fact]
+    public void Remove_StudentEntity_SuccessfullyRemoved()
+    {
+        //Arrange
+        var storage = new Storage();
+        var first = "First";
+        var last = "Last";
+        var sid = 1234567890;
+        var name = new FullName(first, last);
+        var student = new Student(name, sid);
+
+        storage.Add(student);
+
+        //Act
+        storage.Remove(student);
+
+        //Assert
+        Assert.True(!storage.Contains(student));
     }
 }

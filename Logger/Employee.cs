@@ -1,6 +1,4 @@
-﻿using System.Text;
-using System.Xml.Linq;
-
+﻿
 namespace Logger;
 
 //thoughts on this implementation of Employee/Student?
