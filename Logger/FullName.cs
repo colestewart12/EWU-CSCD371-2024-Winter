@@ -2,11 +2,12 @@
 
 namespace Logger;
 
-public record FullName
+// value type, since it is more helpful to check equality of a name's data (the actual name) than its reference (the location in memory)
+public record class FullName
 {
-    public string FirstName { get; }
-    public string? MiddleName { get; }
-    public string LastName { get; }
+    public string FirstName { get; init; }
+    public string? MiddleName { get; init; }
+    public string LastName { get; init; }
 
     public FullName(string firstName, string? middleName, string lastName)
     {
@@ -14,13 +15,28 @@ public record FullName
         MiddleName = middleName;
         LastName = lastName;
     }
-    public FullName(string firstName, string lastName)
+    public FullName(string firstName, string lastName) : this(firstName, null, lastName){}
+    public FullName(string fullName)
     {
-        FirstName = firstName;
-        MiddleName = null;
-        LastName = lastName;
+        string[] names = fullName.Split();
+        if (names.Length == 2)
+        {
+            FirstName = names[0];
+            MiddleName = null;
+            LastName = names[1];
+        }
+        else if (names.Length == 3)
+        {
+            FirstName = names[0];
+            MiddleName = names[1];
+            LastName = names[2];
+        }
+        else
+        {
+            throw new ArgumentException("invalid name");
+        }
     }
-   
+
     public override string ToString()
     {
         StringBuilder result = new();

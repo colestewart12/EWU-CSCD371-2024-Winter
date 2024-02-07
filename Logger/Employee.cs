@@ -1,31 +1,35 @@
 ﻿using System.Text;
+using System.Xml.Linq;
 
 namespace Logger;
 
 //thoughts on this implementation of Employee/Student?
-public record Employee : BaseEntity
+public record Employee : IEntity
 {
-    private FullName fullName = new("", null, "");
-    protected override string GetName()
+    private FullName _name;
+    public int Eid { get; init; }
+    Guid IEntity.Id { get => ((IEntity)this).Id; init => Guid.NewGuid(); }
+    public string Name
     {
-        return fullName.ToString();
+        get
+        {
+            return _name.ToString();
+        }
+        set
+        {
+            _name = new(value);
+        }
     }
 
-    protected override void SetName(string name)
+    public Employee(FullName name, int eid)
     {
-        string[] names = name.Split();
-        if (names.Length == 2)
-        {
-            fullName = new(names[0], names[1]);
-        }
-        else if (names.Length == 3)
-        {
-            fullName = new(names[0], names[1], names[2]);
-        }
-        else
-        {
-            throw new ArgumentException("invalid name");
-        }
+        _name = name; 
+        Eid = Eid;
+    }
+    public Employee(string name, int eid)
+    {
+        _name = new(name);
+        Eid = Eid;
     }
 }
 

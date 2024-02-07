@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Runtime.CompilerServices;
+using Xunit;
 
 namespace Logger.Tests;
 
@@ -6,42 +7,18 @@ public class BaseEntityTests
 {
     private sealed record class TestEntity : BaseEntity
     {
-        private string _name;
-
-        public TestEntity(Guid id, string name)
+        public override string Name { get; set; }
+        public TestEntity(string name) 
         {
-            _name = name;
-            Id = id;
+            Name = name;
         }
-
-        protected override string GetName()
-        {
-            return _name;
-        }
-
-        protected override void SetName(string name)
-        {
-            _name = name;
-        }
-    }
-
-    [Fact]
-    public void BaseEntity_SetId_SuccessfulSet()
-    {
-        //Arrange
-        var entityId = Guid.NewGuid();
-        var testEntity = new TestEntity(entityId, "Test Name");
-
-        //Assert
-        Assert.Equal(entityId, testEntity.Id);
     }
 
     [Fact]
     public void BaseEntity_SetName_SuccessfulSet()
     {
         //Arrange
-        var entityId = Guid.NewGuid();
-        var testEntity = new TestEntity(entityId, "Test Name");
+        var testEntity = new TestEntity("Test Name");
 
         //Act
         ((IEntity)testEntity).Name = "New Name";

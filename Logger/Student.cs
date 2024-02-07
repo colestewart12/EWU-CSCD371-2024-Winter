@@ -1,15 +1,31 @@
 ﻿namespace Logger;
 
-public record Student : BaseEntity
+public record Student : IEntity
 {
-    protected override string GetName()
+    private FullName _name;
+    public int Sid { get; init; }
+    Guid IEntity.Id { get => ((IEntity)this).Id; init => Guid.NewGuid(); }
+    public string Name
     {
-        throw new NotImplementedException();
+        get
+        {
+            return _name.ToString();
+        }
+        set
+        {
+            _name = new(value);
+        }
     }
 
-    protected override void SetName(string name)
+    public Student(FullName name, int sid)
     {
-        throw new NotImplementedException();
+        _name = name;
+        Sid = sid;
+    }
+    public Student(string name, int sid)
+    {
+        _name = new(name);
+        Sid = sid;
     }
 }
 

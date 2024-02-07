@@ -1,15 +1,38 @@
 ﻿namespace Logger;
 
-public record Book : BaseEntity
+public record Book : IEntity
 {
-    protected override string GetName()
+
+    private FullName _author;
+    public int Eid { get; init; }
+    Guid IEntity.Id { get => ((IEntity)this).Id; init => Guid.NewGuid(); }
+    public string Author
     {
-        throw new NotImplementedException();
+        get
+        {
+            return _author.ToString();
+        }
+        set
+        {
+            _author = new(value);
+        }
     }
 
-    protected override void SetName(string name)
+    public string Name { get; set; }
+    public int Isbn { get; init; }
+
+
+    public Book(string name, string author, int isbn)
     {
-        throw new NotImplementedException();
+        Name = name;
+        _author = new(author);
+        Isbn = isbn;
+    }
+    public Book(string name, FullName author, int isbn)
+    {
+        Name = name;
+        _author = author;
+        Isbn = isbn;
     }
 }
 
