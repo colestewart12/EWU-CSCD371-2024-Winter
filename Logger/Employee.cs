@@ -24,12 +24,12 @@ public record Employee : IEntity
     public Employee(FullName name, int eid)
     {
         _name = name; 
-        Eid = Eid;
+        Eid = eid;
     }
     public Employee(string name, int eid)
     {
         _name = new(name);
-        Eid = Eid;
+        Eid = eid;
     }
 }
 
