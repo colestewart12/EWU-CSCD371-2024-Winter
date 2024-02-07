@@ -7,28 +7,25 @@ namespace Logger;
 public record Employee : IEntity
 {
     private FullName _name;
-    public int Eid { get; init; }
-    Guid IEntity.Id { get => ((IEntity)this).Id; init => Guid.NewGuid(); }
+
+    public int Eid { get; set; }
+    public Guid Id { get; init; }
     public string Name
     {
-        get
-        {
-            return _name.ToString();
-        }
-        set
-        {
-            _name = new(value);
-        }
+        get => _name.ToString();
+        set => _name = new(value);
     }
 
     public Employee(FullName name, int eid)
     {
         _name = name; 
+        Id = Guid.NewGuid();
         Eid = eid;
     }
     public Employee(string name, int eid)
     {
         _name = new(name);
+        Id = Guid.NewGuid();
         Eid = eid;
     }
 }

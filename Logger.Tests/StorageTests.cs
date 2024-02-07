@@ -115,16 +115,49 @@ public class StorageTests
     }
 
     [Fact]
-    public void Get_BookEntity_NotFound()
+    public void AddandContains_EmployeeEntity_SuccessfullyAdded()
     {
-        // Arrange
+        //Arrange
         var storage = new Storage();
-        var testId = Guid.NewGuid();
+        var employee = new Employee("Test Employee", 1234567890);
+
+        //Act
+        storage.Add(employee);
+
+        //Assert
+        Assert.True(storage.Contains(employee));
+    }
+
+    [Fact]
+    public void Remove_EmployeeEntity_SuccessfullyRemoved()
+    {
+        //Arrange
+        var storage = new Storage();
+        var first = "First";
+        var last = "Last";
+        var name = new FullName(first, last);
+        var employee = new Employee(name, 1234567890);
+        storage.Add(employee);
+
+        //Act
+        storage.Remove(employee);
+
+        //Assert
+        Assert.True(!storage.Contains(employee));
+    }
+
+    [Fact]
+    public void Get_EmployeeEntity_SuccessfulFind()
+    {
+        //Arrange
+        var storage = new Storage();
+        var employee = new Employee("Test Employee", 1234567890);
+        storage.Add(employee);
 
         // Act
-        var returned = storage.Get(testId);
+        var returned = storage.Get(employee.Id);
 
         // Assert
-        Assert.Null(returned);
+        Assert.Equal(employee, returned);
     }
 }
