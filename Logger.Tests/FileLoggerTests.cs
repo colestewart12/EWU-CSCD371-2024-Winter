@@ -25,8 +25,7 @@ public class FileLoggerTests : FileLoggerTestsBase
             {
                 Assert.True(DateTime.TryParse(dateTime, out _));
                 Assert.Equal(nameof(FileLoggerTests), source);
-                Assert.True(Enum.TryParse(typeof(LogLevel), levelText, out object? level) ?
-                    level is LogLevel.Error : false,"Level was not parsed successfully.");
+                Assert.True(Enum.TryParse(typeof(LogLevel), levelText, out object? level) && level is LogLevel.Error,"Level was not parsed successfully.");
             }
         }
     }

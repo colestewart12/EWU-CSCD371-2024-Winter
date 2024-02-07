@@ -1,9 +1,7 @@
 ﻿namespace Logger.Tests;
 
-public class TestLogger : BaseLogger, ILogger
+public class TestLogger(string logSource) : BaseLogger(logSource), ILogger
 {
-    public TestLogger(string logSource) : base(logSource) { }
-    
     public List<(LogLevel LogLevel, string Message)> LoggedMessages { get; } = new List<(LogLevel, string)>();
 
     public static ILogger CreateLogger(in TestLoggerConfiguration configuration) => 
@@ -17,8 +15,6 @@ public class TestLogger : BaseLogger, ILogger
     public override void Log(LogLevel logLevel, string message) => LoggedMessages.Add((logLevel, message));
 }
 
-public class TestLoggerConfiguration : BaseLoggerConfiguration, ILoggerConfiguration
+public class TestLoggerConfiguration(string logSource) : BaseLoggerConfiguration(logSource), ILoggerConfiguration
 {
-    public TestLoggerConfiguration(string logSource) : base(logSource) { }
-
 }

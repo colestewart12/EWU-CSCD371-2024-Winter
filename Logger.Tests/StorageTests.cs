@@ -69,4 +69,62 @@ public class StorageTests
         //Assert
         Assert.Null(returned);
     }
+
+    [Fact]
+    public void AddandContains_BookEntity_SuccessfullyAdded()
+    {
+        //Arrange
+        var storage = new Storage();
+        var book = new Book("Book Name", "Author Name", 1234567890);
+
+        //Act
+        storage.Add(book);
+
+        //Assert
+        Assert.True(storage.Contains(book));
+    }
+
+    [Fact]
+    public void Remove_BookEntity_SuccessfullyAdded()
+    {
+        //Arrange
+        var storage = new Storage();
+        var book = new Book("Book Name", "Author Name", 1234567890);
+        storage.Add(book);
+
+        //Act
+        storage.Remove(book);
+
+        //Assert
+        Assert.True(!storage.Contains(book));
+    }
+
+    [Fact]
+    public void Get_BookEntity_SuccessfulFind()
+    {
+        // Arrange
+        var storage = new Storage();
+        var book = new Book("Book Name", "Author Name", 1234567890);
+        storage.Add(book);
+
+        // Act
+        var returned = storage.Get(book.Id);
+
+        // Assert
+        Assert.Equal(book, returned);
+    }
+
+    [Fact]
+    public void Get_BookEntity_NotFound()
+    {
+        // Arrange
+        var storage = new Storage();
+        var testId = Guid.NewGuid();
+
+        // Act
+        var returned = storage.Get(testId);
+
+        // Assert
+        Assert.Null(returned);
+    }
 }
