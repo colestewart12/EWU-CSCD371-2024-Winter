@@ -136,8 +136,8 @@ public class StorageTests
         var first = "First";
         var last = "Last";
         var name = new FullName(first, last);
-        var eid = 1234567890;
-        var employee = new Employee(name, eid);
+        var Eid = 1234567890;
+        var employee = new Employee(name, Eid);
         storage.Add(employee);
 
         //Act
@@ -183,9 +183,9 @@ public class StorageTests
         var storage = new Storage();
         var first = "First";
         var last = "Last";
-        var sid = 1234567890;
+        var Sid = 1234567890;
         var name = new FullName(first, last);
-        var student = new Student(name, sid);
+        var student = new Student(name, Sid);
 
         storage.Add(student);
 
