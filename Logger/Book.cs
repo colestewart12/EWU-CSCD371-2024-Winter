@@ -4,17 +4,18 @@ namespace Logger;
 
 public record Book : IEntity
 {
-    private FullName _author;
+    // implemented implicitly since Name is a frequently-accessed member
+    public string Name { get; set; }
 
+    //TODO: explain why this is implemeted implicitly
     public Guid Id { get; init; }
 
-    public string Author
+    private FullName _author;
+        public string Author
     {
         get => _author.ToString();
         set => _author = new(value);
     }
-
-    public string Name { get; set; }
     public int Isbn { get; init; }
 
     public Book(string name, string author, int isbn, Guid id)

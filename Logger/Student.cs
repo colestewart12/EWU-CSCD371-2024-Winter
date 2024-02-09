@@ -4,7 +4,11 @@ public record Student : IEntity
 {
     private FullName _name;
     public int Sid { get; init; }
+
+    //TODO: explain why this is implemeted implicitly
     public Guid Id { get; init; }
+
+    // implemented implicitly since Name is a frequently-accessed
     public string Name
     {
         get

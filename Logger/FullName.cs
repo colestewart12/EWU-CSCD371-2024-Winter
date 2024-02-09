@@ -12,9 +12,20 @@ public record class FullName
 
     public FullName(string firstName, string? middleName, string lastName)
     {
-        FirstName = firstName;
-        MiddleName = middleName;
-        LastName = lastName;
+        if (firstName == null)
+        {
+            throw new ArgumentNullException(nameof(firstName));
+        }
+        else if (lastName == null)
+        {
+            throw new ArgumentNullException(nameof(firstName));
+        }
+        else
+        {
+            FirstName = firstName;
+            MiddleName = middleName;
+            LastName = lastName;
+        }
     }
     public FullName(string firstName, string lastName) : this(firstName, null, lastName){}
     public FullName(string fullName)
@@ -32,7 +43,7 @@ public record class FullName
             MiddleName = names[1];
             LastName = names[2];
         }
-        else if (FirstName == null || LastName == null)
+        else if (names.Length >= 2 && (names[0] is null || names[1] is null))
         {
             throw new ArgumentException("first name and last name can't be null");
         }

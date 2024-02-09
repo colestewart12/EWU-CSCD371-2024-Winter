@@ -1,13 +1,15 @@
 ﻿
 namespace Logger;
 
-//thoughts on this implementation of Employee/Student?
 public record Employee : IEntity
 {
     private FullName _name;
-
     public int Eid { get; set; }
+
+    //TODO: explain why this is implemeted implicitly
     public Guid Id { get; init; }
+
+    // implemented implicitly since Name is a frequently-accessed
     public string Name
     {
         get => _name.ToString();
