@@ -16,6 +16,18 @@ public record Student : IEntity
             _name = new(value);
         }
     }
+    public Student(FullName name, int sid, Guid id)
+    {
+        _name = name;
+        Sid = sid;
+        Id = id;
+    }
+    public Student(string name, int sid, Guid id)
+    {
+        _name = new(name);
+        Sid = sid;
+        Id = id;
+    }
 
     public Student(FullName name, int sid)
     {

@@ -17,6 +17,22 @@ public record Book : IEntity
     public string Name { get; set; }
     public int Isbn { get; init; }
 
+    public Book(string name, string author, int isbn, Guid id)
+    {
+        Id = id;
+        Name = name;
+        _author = new(author);
+        Isbn = isbn;
+    }
+
+    public Book(string name, FullName author, int isbn, Guid id)
+    {
+        Id = id;
+        Name = name;
+        _author = author;
+        Isbn = isbn;
+    }
+
     public Book(string name, string author, int isbn)
     {
         Id = Guid.NewGuid();

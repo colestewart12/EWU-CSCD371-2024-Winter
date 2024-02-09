@@ -14,9 +14,21 @@ public record Employee : IEntity
         set => _name = new(value);
     }
 
+    public Employee(FullName name, int eid, Guid id)
+    {
+        _name = name;
+        Id = id;
+        Eid = eid;
+    }
+    public Employee(string name, int eid, Guid id)
+    {
+        _name = new(name);
+        Id = id;
+        Eid = eid;
+    }
     public Employee(FullName name, int eid)
     {
-        _name = name; 
+        _name = name;
         Id = Guid.NewGuid();
         Eid = eid;
     }

@@ -3,6 +3,7 @@
 namespace Logger;
 
 // value type, since it is more helpful to check equality of a name's data (the actual name) than its reference (the location in memory)
+// not immutable, as someone's name can change
 public record class FullName
 {
     public string FirstName { get; init; }
@@ -30,6 +31,10 @@ public record class FullName
             FirstName = names[0];
             MiddleName = names[1];
             LastName = names[2];
+        }
+        else if (FirstName == null || LastName == null)
+        {
+            throw new ArgumentException("first name and last name can't be null");
         }
         else
         {
