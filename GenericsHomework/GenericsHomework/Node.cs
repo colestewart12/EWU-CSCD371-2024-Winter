@@ -20,8 +20,18 @@ namespace GenericsHomework
             Next = this;
         }
 
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
+
+
         public void Append(T value)
         {
+            if (Exists(value))
+            {
+                throw new InvalidOperationException("Error: No duplicate values allowed");
+            }
 
             Node<T> newNode = new Node<T>(value);
             newNode.Next = Next;
@@ -33,6 +43,20 @@ namespace GenericsHomework
             //Since the list is singly linked, they will be available for garbage collection
             Next = this;
         }
+
+        public bool Exists(T value)
+        {
+            Node<T> current = this;
+
+            do
+            {
+                if (current.Value.Equals(value)) return true;
+                current = current.Next;
+
+            } while (current != this);
+            return false;
+        }
+
 
 
     }
