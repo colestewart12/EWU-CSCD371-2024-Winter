@@ -28,5 +28,12 @@ namespace GenericsHomework
             Next = newNode;
         }
 
+        public void Clear()
+        {
+            //Since the list is singly linked, they will be available for garbage collection
+            Next = this;
+        }
+
+
     }
 }
