@@ -19,5 +19,14 @@ namespace GenericsHomework
             // Points at itself initially
             Next = this;
         }
+
+        public void Append(T value)
+        {
+
+            Node<T> newNode = new Node<T>(value);
+            newNode.Next = Next;
+            Next = newNode;
+        }
+
     }
 }
