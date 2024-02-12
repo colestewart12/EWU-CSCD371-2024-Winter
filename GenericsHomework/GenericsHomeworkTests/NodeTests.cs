@@ -1,7 +1,6 @@
-﻿using GenericsHomework;
-using System;
+using GenericsHomework;
 
-namespace GenericsHomework.Tests;
+namespace GenericsHomeworkTests;
 
 public class NodeTests
 {
