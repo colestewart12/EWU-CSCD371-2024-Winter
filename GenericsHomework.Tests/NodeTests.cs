@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Diagnostics.Metrics;
+using Xunit;
 
 namespace GenericsHomework.Tests;
 
@@ -40,5 +41,50 @@ public class NodeTests
 
         //Assert
         Assert.Equal(testNode.Value, testNode.Next.Value);
+    }
+
+    [Fact]
+    public void Exists_RegularNode_Successful()
+    {
+        //Arrange
+        Node<int> testNode = new(1);
+
+        //Act and Assert
+        Assert.True(testNode.Exists(1));
+    }
+
+    [Fact]
+    public void ToString_ValidNode_Successful()
+    {
+        //Arrange
+        Node<int> testNode = new(1);
+
+        //Act and Assert
+        Assert.Equal("1", testNode.ToString());
+
+    }
+
+    [Fact]
+    public void ToString_NullNode_ThrowException()
+    {
+        //Arrange
+        Node<string> testNode = new(null!);
+
+        //Act
+        Assert.Throws<InvalidOperationException>(() => testNode.ToString());
+    }
+
+    [Fact]
+    public void Exists_MissingNode_Unsuccessful()
+    {
+        //Arrange
+        Node<string> testNode = new("First");
+
+        //Act
+        testNode.Append("Second");
+
+        //Assert
+        Assert.False(testNode.Exists("Third"));
+
     }
 }
