@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
-namespace GenericsHomework;
+﻿namespace GenericsHomework;
 public class Node<T>
 {
     //Type T so that values are homogenous

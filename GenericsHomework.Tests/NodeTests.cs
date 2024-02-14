@@ -1,6 +1,4 @@
-﻿using GenericsHomework;
-using System;
-using Xunit;
+﻿using Xunit;
 
 namespace GenericsHomework.Tests;
 
@@ -24,7 +22,7 @@ public class NodeTests
     public void Append_DuplicateValue_ThrowsError()
     {
         //Arrange
-        var testNode = new Node<string>("Node 1");
+        Node<string> testNode = new("Node 1");
 
         //Assert
         Assert.Throws<InvalidOperationException>(() => testNode.Append("Node 1"));
