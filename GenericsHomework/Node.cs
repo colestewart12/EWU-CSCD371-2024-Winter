@@ -33,8 +33,10 @@ public class Node<T>
             throw new InvalidOperationException("Error: No duplicate values allowed");
         }
 
-        Node<T> newNode = new Node<T>(value);
-        newNode.Next = Next;
+        Node<T> newNode = new(value)
+        {
+            Next = Next
+        };
         Next = newNode;
     }
 
@@ -58,4 +60,4 @@ public class Node<T>
         } while (current != this);
         return false;
     }
-    }
+ }
