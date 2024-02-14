@@ -34,7 +34,7 @@ public class NodeTests
     public void Clear_RemoveNext_Successful()
     {
         //Arrange
-        var testNode = new Node<int>(1);
+        Node<int> testNode = new(1);
         testNode.Append(2);
 
         //Act
