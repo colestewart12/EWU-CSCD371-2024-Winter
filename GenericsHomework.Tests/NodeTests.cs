@@ -10,7 +10,7 @@ public class NodeTests
     public void Append_AddNewNode_Successful()
     {
         //Arrange
-        var testNode = new Node<string>("First");
+        Node<string> testNode = new("First");
 
         //Act
         testNode.Append("Second");
