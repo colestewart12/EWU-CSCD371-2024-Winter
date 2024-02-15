@@ -35,7 +35,7 @@ public class Node<T>
 
     public void Clear()
     {
-        //Since the list is singly linked, they will be available for garbage collection
+        //Since the outside references to the deleted nodes will be lost, they will be available for garbage collection
         Next = this;
     }
 
