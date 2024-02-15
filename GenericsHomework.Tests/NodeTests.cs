@@ -40,7 +40,7 @@ public class NodeTests
         testNode.Clear();
 
         //Assert
-        Assert.Equal(testNode.Value, testNode.Next.Value);
+        Assert.Equal<int>(testNode.Value, testNode.Next.Value);
     }
 
     [Fact]
