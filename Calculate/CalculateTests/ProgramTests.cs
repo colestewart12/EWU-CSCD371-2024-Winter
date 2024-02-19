@@ -14,7 +14,7 @@ public class ProgramTests
             {
                 Program program = new Program();
 
-                program.WriteLine("Testing the WriteLine!");
+                program.WriteLine("Testing the WriteLine");
                 var defaultReadResult = program.ReadLine();
 
                 Assert.Null(defaultReadResult);
