@@ -20,6 +20,23 @@ public class CalculatorTests
     }
 
     [Theory]
+    [InlineData('+', 1,2,3)]
+    [InlineData('-', 2,3,-1)]
+    [InlineData('*', 2,3,6)]
+    [InlineData('/', 6,3,2)]
+    public void MathematicalOperations_UsingGenericDictionary_SuccessfulAdd(char operationSymbol, double a, double b, double result)
+    {
+        //Arrange
+        var operation = Calculator.MathematicalOperations[operationSymbol];
+
+        //Act
+        double number = operation(a, b);
+
+        //Assert
+        Assert.Equal(result, number);
+    }
+
+    [Theory]
     [InlineData(3, 2, 1)]
     [InlineData(2, 3, -1)]
     public void Subtract_TwoDoubles_SuccessfulAdd(double a, double b, double result)

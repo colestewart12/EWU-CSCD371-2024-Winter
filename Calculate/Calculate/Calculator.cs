@@ -18,4 +18,13 @@ public class Calculator
         return a / b;
             
     }
+
+    public static IReadOnlyDictionary<char, Func<double, double, double>> MathematicalOperations { get; }
+        = new Dictionary<char, Func<double, double, double>>
+        {
+            {'+', Add },
+            {'-', Subtract },
+            {'*', Multiply },
+            {'/', Divide },
+        };
 }
