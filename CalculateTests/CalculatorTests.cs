@@ -74,4 +74,15 @@ public class CalculatorTests
         Assert.Equal(result, number);
 
     }
+    
+    [Fact]
+public void Divide_ByZeroThrowsArgumentException()
+{
+    // Arrange
+    double a = 5;
+    double b = 0;
+
+    // Act & Assert
+    Assert.Throws<ArgumentException>(() => Calculator.Divide(a, b));
+}
 }
