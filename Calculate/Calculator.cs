@@ -36,10 +36,8 @@ public class Calculator
             output = 0;
             return false;
         }
-        int first;
-        bool firstValid = int.TryParse(items[0], out first);
-        int second;
-        bool secondValid = int.TryParse(items[2], out second);
+        bool firstValid = int.TryParse(items[0], out int first);
+        bool secondValid = int.TryParse(items[2], out int second);
         if (!(firstValid && secondValid))
         {
             output = 0;
@@ -56,8 +54,8 @@ public class Calculator
             output = 0;
             return false;
         }
-        output = MathematicalOperations[operationChar](first, second);
 
+        output = MathematicalOperations[operationChar](first, second);
         return true;
     }
 }

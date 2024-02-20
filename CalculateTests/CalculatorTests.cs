@@ -43,11 +43,8 @@ public class CalculatorTests
     [InlineData("6 / 3", 2)]
     public void TryCalculate_ValidInputs_SuccessfulOperation(string input, double result)
     {
-        //Arrange
-        double output = 0;
-
         //Act
-        bool canCalculate = Calculator.TryCalculate(input, out output);
+        bool canCalculate = Calculator.TryCalculate(input, out double output);
 
         //Assert
         Assert.True(canCalculate);
@@ -59,13 +56,11 @@ public class CalculatorTests
     [InlineData("1 2 3")]
     [InlineData("1 + 2 3")]
     [InlineData("a * 3")]
+    [InlineData("1 ++ 2")]
     public void TryCalculate_InvalidInputs_UnsuccessfulOperation(string input)
     {
-        //Arrange
-        double output = 0;
-
         //Act
-        bool canCalculate = Calculator.TryCalculate(input, out output);
+        bool canCalculate = Calculator.TryCalculate(input, out double output);
 
         //Assert
         Assert.False(canCalculate);
