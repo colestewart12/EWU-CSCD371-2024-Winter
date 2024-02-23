@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Calculate;
+﻿namespace Calculate;
 
 public class Calculator
 {
@@ -30,7 +27,7 @@ public class Calculator
 
     public static bool TryCalculate(string input, out double output)
     {
-        string[] items = input.Split();
+        string[] items = input.Split(" ");
         if (items.Length != 3 )
         {
             output = 0;

@@ -1,6 +1,4 @@
-﻿
-
-using Calculate;
+﻿using Calculate;
 
 namespace CalculateTests;
 
@@ -57,6 +55,7 @@ public class CalculatorTests
     [InlineData("1 + 2 3")]
     [InlineData("a * 3")]
     [InlineData("1 ++ 2")]
+    [InlineData("1 +  2")]
     public void TryCalculate_InvalidInputs_UnsuccessfulOperation(string input)
     {
         //Act
