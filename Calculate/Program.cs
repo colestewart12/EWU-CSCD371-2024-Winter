@@ -13,6 +13,35 @@ public class Program
     }
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        Program program = new();
+
+        while (true)
+        {
+            program.WriteLine("Enter an equation:");
+            string? equation = program.ReadLine();
+
+            if (string.IsNullOrEmpty(equation))
+            {
+                program.WriteLine("Invalid. Please enter a valid equation.");
+                continue;
+            }
+
+            if (Calculator.TryCalculate(equation, out double solution))
+            {
+                program.WriteLine($"Result: {solution}");
+            }
+            else
+            {
+                program.WriteLine("Invalid. Please enter a valid equation.");
+            }
+
+            program.WriteLine("Do you want to ask another? (Y/N)");
+            string? response = program.ReadLine();
+
+            if (string.Equals(response, "N", StringComparison.OrdinalIgnoreCase))
+            {
+                break;
+            }
+        }
     }
 }
