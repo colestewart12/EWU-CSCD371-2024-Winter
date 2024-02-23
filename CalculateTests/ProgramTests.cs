@@ -6,18 +6,40 @@ namespace CalculateTests;
 public class ProgramTests
 {
     [Fact]
-    public void Test1()
+    public void WriteLine_TestProperty_Successful()
     {
+        // Arrange
+        string expectedOutput = "Testing the WriteLine";
+        string actualOutput = "";
+
         // Act & Assert
-        ConsoleAssert.Expect("Testing the WriteLine",
-            () =>
-            {
-                Program program = new Program();
+        Program program = new Program
+        {
+            // Use the WriteLine property for testing output
+            WriteLine = s => actualOutput = s
+        };
 
-                program.WriteLine("Testing the WriteLine");
-                var defaultReadResult = program.ReadLine();
+        program.WriteLine(expectedOutput);
 
-                Assert.Null(defaultReadResult);
-            });
+        Assert.Equal(expectedOutput, actualOutput);
+
+    }
+
+    [Fact]
+    public void ReadLine_TestProperty_Successful()
+    {
+        // Arrange
+        string expected = "Test ReadLine";
+
+        Program program = new()
+        {
+            ReadLine = () => expected
+        };
+
+        // Act
+        string? result = program.ReadLine();
+
+        // Assert
+        Assert.Equal(expected, result);
     }
 }
