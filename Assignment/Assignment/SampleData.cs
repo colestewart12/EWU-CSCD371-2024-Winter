@@ -1,12 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Assignment
 {
     public class SampleData : ISampleData
     {
+        private readonly string csvFilePath = "People.csv";
         // 1.
-        public IEnumerable<string> CsvRows => throw new NotImplementedException();
+        public IEnumerable<string> CsvRows 
+        {
+            get
+            {
+                if (!File.Exists(csvFilePath))
+                {
+                    throw new FileNotFoundException($"File not found: {csvFilePath}");
+                }
+
+                using var reader = new StreamReader(csvFilePath);
+                // Skip the header row
+                reader.ReadLine();
+
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    if (line != null)
+                    {
+                        yield return line;
+                    }
+                }
+            }
+        }
 
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() 
