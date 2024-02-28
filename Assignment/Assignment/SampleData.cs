@@ -23,7 +23,7 @@ namespace Assignment
 
                 while (!reader.EndOfStream)
                 {
-                    var line = reader.ReadLine();
+                    string? line = reader.ReadLine();
                     if (line != null)
                     {
                         yield return line;
@@ -33,8 +33,15 @@ namespace Assignment
         }
 
         // 2.
-        public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() 
-            => throw new NotImplementedException();
+        public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
+        {
+            List<string> dataSource = CsvRows.ToList();
+            foreach(var row in dataSource)
+            {
+                
+            }
+            return;
+        }
 
         // 3.
         public string GetAggregateSortedListOfStatesUsingCsvRows()
