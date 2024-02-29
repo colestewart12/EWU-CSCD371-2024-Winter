@@ -17,4 +17,17 @@ public class SampleDataTests
         // Assert
         Assert.Equals(49, csvRowsCount);
     }
+
+    [TestMethod]
+    public void GetUniqueSortedListOfStatesGivenCsvRows_ReturnSortedUniqueStates()
+    {
+        // Arrange
+        var sampleData = new SampleData();
+
+        // Act
+        var uniqueStates = sampleData.GetUniqueSortedListOfStatesGivenCsvRows().ToList();
+
+        // Assert
+        Assert.Equals("AL", uniqueStates[0]);
+    }
 }

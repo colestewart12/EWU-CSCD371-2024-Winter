@@ -35,12 +35,10 @@ namespace Assignment
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
         {
-            List<string> dataSource = CsvRows.ToList();
-            foreach(var row in dataSource)
-            {
-                
-            }
-            return;
+            return CsvRows
+                .Select(row => row.Split(',')[6])
+                .Distinct()
+                .OrderBy(state => state);
         }
 
         // 3.
