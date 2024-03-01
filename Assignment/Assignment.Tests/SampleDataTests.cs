@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assignment;
 
 namespace Assignment.Tests;
 
+[TestClass]
 public class SampleDataTests
 {
     [TestMethod]
@@ -11,11 +13,10 @@ public class SampleDataTests
         var sampleData = new SampleData();
 
         // Act
-        var csvRows = sampleData.CsvRows;
-        var csvRowsCount = sampleData.CsvRows.Count;
+        var csvRows = sampleData.CsvRows.Count();
 
         // Assert
-        Assert.Equals(49, csvRowsCount);
+        Assert.AreEqual(50, csvRows);
     }
 
     [TestMethod]
@@ -28,7 +29,7 @@ public class SampleDataTests
         List<string> uniqueStates = sampleData.GetUniqueSortedListOfStatesGivenCsvRows().ToList();
 
         // Assert
-        Assert.Equals("AL", uniqueStates[0]);
+        Assert.AreEqual("AL", uniqueStates[0]);
     }
 
     [TestMethod]
@@ -41,6 +42,6 @@ public class SampleDataTests
         string result = sampleData.GetAggregateSortedListOfStatesUsingCsvRows();
 
         // Assert
-        Assert.Equals("A", result[0]);
+        Assert.AreEqual('A', result[0]);
     }
 }
