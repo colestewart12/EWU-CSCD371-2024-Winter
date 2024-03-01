@@ -60,4 +60,17 @@ public class SampleDataTests
         Assert.AreEqual("Mobile", people[0].Address.City);
         Assert.AreEqual("37308", people[0].Address.Zip);
     }
+
+    [TestMethod]
+    public void FilterPeopleByEmail_Success()
+    {
+        //Arrange
+        var sampleData = new SampleData();
+
+        //Act
+        var people = sampleData.FilterByEmailAddress(filter => filter == "pjenyns0@state.gov").ToList();
+
+        //Assert
+        Assert.AreEqual(1, people.Count());
+    }
 }
