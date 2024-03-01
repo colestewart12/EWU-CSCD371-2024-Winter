@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Assignment;
 
 namespace Assignment.Tests;
 
@@ -71,6 +70,6 @@ public class SampleDataTests
         var people = sampleData.FilterByEmailAddress(filter => filter == "pjenyns0@state.gov").ToList();
 
         //Assert
-        Assert.AreEqual(1, people.Count());
+        Assert.AreEqual(1, people.Count);
     }
 }
