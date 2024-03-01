@@ -70,11 +70,8 @@ namespace Assignment
             Predicate<string> filter)
         {
             return People
-                .Select(people =>
-                {
-                    return
-                })
-                .Where(person => person.Email.Contains(filter));
+                .Where(person => filter(person.EmailAddress))
+                .Select(person => (person.FirstName, person.LastName));
         }
 
         // 6.
