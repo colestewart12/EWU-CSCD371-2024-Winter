@@ -44,4 +44,20 @@ public class SampleDataTests
         // Assert
         Assert.AreEqual('A', result[0]);
     }
+
+    [TestMethod]
+    public void Person_FromCSVRows_SortedByAddress()
+    {
+        //Arrange
+        var sampleData = new SampleData();
+
+        //Act
+        var people = sampleData.People.ToList();
+
+        //Assert
+        Assert.AreEqual(50, people.Count);
+        Assert.AreEqual("AL", people[0].Address.State);
+        Assert.AreEqual("Mobile", people[0].Address.City);
+        Assert.AreEqual("37308", people[0].Address.Zip);
+    }
 }
