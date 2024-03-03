@@ -72,4 +72,21 @@ public class SampleDataTests
         //Assert
         Assert.AreEqual(1, people.Count);
     }
+
+    [TestMethod]
+    public void GetAggregatedListOfStatesGivenPeopleCollection_ValidPeople_ReturnsList()
+    {
+        // Arrange
+        var sampleData = new SampleData();
+        var people = sampleData.People.ToList();
+        var csvResult = sampleData.GetUniqueSortedListOfStatesGivenCsvRows().ToList();
+
+        // Act
+        var result = sampleData.GetAggregateListOfStatesGivenPeopleCollection(people);
+        Console.WriteLine(result[0] + "" + result[1]);
+        Console.WriteLine(csvResult[0]);
+
+        // Assert
+        Assert.AreEqual(csvResult[0], result[0] + "" + result[1]);
+    }
 }
