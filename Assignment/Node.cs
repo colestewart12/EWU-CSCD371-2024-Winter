@@ -2,16 +2,16 @@
 
 namespace Assignment;
 
-public class Node<T> : IEnumerable<T>
+public class Node<T> : IEnumerable<Node<T>> 
 {
     //Node
     public Node(T value)
     {
         Value = value;
-        
         Next = this;
     }
 
+    
     public T Value { get; }
     
     public Node<T> Next
@@ -33,12 +33,15 @@ public class Node<T> : IEnumerable<T>
     public void Append(T value)
     {
         if (Exists(value)) throw new ArgumentException("This item already exists in the list");
-        Node<T> newNode = new(value)
+        Node<T> currentNode = this;
+        while(currentNode.Next != this)
         {
-            Next = Next
-        };
-        Next = newNode;
-        //return newNode;
+            currentNode = currentNode.Next;
+        }
+
+        Node<T> newNode = new(value);
+        currentNode.Next = newNode;
+        newNode.Next = this;
 
     }
     public void Clear()
@@ -62,14 +65,34 @@ public class Node<T> : IEnumerable<T>
         return false;
     }
 
-    public IEnumerator<T> GetEnumerator()
+    public IEnumerator<Node<T>> GetEnumerator()
     {
-        throw new NotImplementedException();
+        Node<T> currentNode = this;
+
+        while(currentNode.Next != this)
+        {
+            yield return currentNode;
+            currentNode = currentNode.Next;
+        }
+        if(currentNode.Next == this)
+        {
+            yield return currentNode;
+        }
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public IEnumerable<Node<T>> ChildItems(int maximum)
     {
-        throw new NotImplementedException();
+        Node<T> currentNode = this;
+        int count = 0;
+
+        while(currentNode.Next != this && count < maximum)
+        {
+            yield return currentNode;
+            currentNode = currentNode.Next;
+            count++;
+        }
     }
 }
 
