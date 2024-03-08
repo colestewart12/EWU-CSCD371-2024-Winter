@@ -9,10 +9,10 @@ public class SampleDataTests
     public void CsvRows_ShouldSkipHeaderAndReturnCorrectLines()
     {
         // Arrange
-        var sampleData = new SampleData();
+        SampleData sampleData = new();
 
         // Act
-        var csvRows = sampleData.CsvRows.Count();
+        int csvRows = sampleData.CsvRows.Count();
 
         // Assert
         Assert.AreEqual(50, csvRows);
@@ -22,7 +22,7 @@ public class SampleDataTests
     public void GetUniqueSortedListOfStatesGivenCsvRows_ReturnSortedUniqueStates()
     {
         // Arrange
-        var sampleData = new SampleData();
+        SampleData sampleData = new();
 
         // Act
         List<string> uniqueStates = sampleData.GetUniqueSortedListOfStatesGivenCsvRows().ToList();
@@ -35,7 +35,7 @@ public class SampleDataTests
     public void GetAggregateSortedListOfStatesUsingCsvRows_ReturnListofStates()
     {
         // Arrange
-        var sampleData = new SampleData();
+        SampleData sampleData = new();
 
         // Act
         string result = sampleData.GetAggregateSortedListOfStatesUsingCsvRows();
@@ -48,10 +48,10 @@ public class SampleDataTests
     public void Person_FromCSVRows_SortedByAddress()
     {
         //Arrange
-        var sampleData = new SampleData();
+        SampleData sampleData = new();
 
         //Act
-        var people = sampleData.People.ToList();
+        List<IPerson> people = sampleData.People.ToList();
 
         //Assert
         Assert.AreEqual(50, people.Count);
@@ -64,10 +64,10 @@ public class SampleDataTests
     public void FilterPeopleByEmail_Success()
     {
         //Arrange
-        var sampleData = new SampleData();
+        SampleData sampleData = new();
 
         //Act
-        var people = sampleData.FilterByEmailAddress(filter => filter == "pjenyns0@state.gov").ToList();
+        List<(string FirstName, string LastName)> people = sampleData.FilterByEmailAddress(filter => filter == "pjenyns0@state.gov").ToList();
 
         //Assert
         Assert.AreEqual(1, people.Count);
@@ -77,12 +77,12 @@ public class SampleDataTests
     public void GetAggregatedListOfStatesGivenPeopleCollection_ValidPeople_ReturnsList()
     {
         // Arrange
-        var sampleData = new SampleData();
-        var people = sampleData.People.ToList();
-        var csvResult = sampleData.GetUniqueSortedListOfStatesGivenCsvRows().ToList();
+        SampleData sampleData = new();
+        List<IPerson> people = sampleData.People.ToList();
+        List<string> csvResult = sampleData.GetUniqueSortedListOfStatesGivenCsvRows().ToList();
 
         // Act
-        var result = sampleData.GetAggregateListOfStatesGivenPeopleCollection(people);
+        string result = sampleData.GetAggregateListOfStatesGivenPeopleCollection(people);
         Console.WriteLine(result[0] + "" + result[1]);
         Console.WriteLine(csvResult[0]);
 

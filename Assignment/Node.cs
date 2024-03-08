@@ -2,7 +2,7 @@
 
 namespace Assignment;
 
-public class Node<T> : IEnumerable<Node<T>> 
+public class Node<T> : IEnumerable<Node<T>>
 {
     //Node
     public Node(T value)

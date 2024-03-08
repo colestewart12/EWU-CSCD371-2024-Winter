@@ -12,7 +12,7 @@ public class NodeTests
         cars.Append("Volvo");
         cars.Append("Ford");
 
-        var result = cars.GetEnumerator();
+        IEnumerator<Node<string>> result = cars.GetEnumerator();
 
         int count = 0;
 
@@ -36,7 +36,7 @@ public class NodeTests
 
         List<string> expectedResult = ["BMW", "Volvo", "Ford"];
 
-        var result = cars.ChildItems(3).ToList();
+        List<Node<string>> result = cars.ChildItems(3).ToList();
 
         Assert.IsTrue(expectedResult.SequenceEqual<string>(result.Select(node => node.Value)));
     }
