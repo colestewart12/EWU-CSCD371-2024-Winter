@@ -74,6 +74,19 @@ public class SampleDataTests
     }
 
     [TestMethod]
+    public void FilterPeopleByEmailGeneric_Success()
+    {
+        //Arrange
+        SampleData sampleData = new();
+
+        //Act
+        List<(string FirstName, string LastName)> people = sampleData.FilterByEmailAddress(filter => filter.Contains(".gov")).ToList();
+
+        //Assert
+        Assert.AreEqual(5, people.Count);
+    }
+
+    [TestMethod]
     public void GetAggregatedListOfStatesGivenPeopleCollection_ValidPeople_ReturnsList()
     {
         // Arrange
