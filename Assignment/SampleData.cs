@@ -17,19 +17,7 @@ public class SampleData : ISampleData
             {
                 throw new FileNotFoundException($"File not found: {csvFilePath}");
             }
-
-            using var reader = new StreamReader(csvFilePath);
-            // Skip the header row
-            reader.ReadLine();
-
-            while (!reader.EndOfStream)
-            {
-                string? line = reader.ReadLine();
-                if (line != null)
-                {
-                    yield return line;
-                }
-            }
+            return File.ReadLines(csvFilePath).Skip(1);
         }
     }
 
