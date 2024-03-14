@@ -1,0 +1,5 @@
+<Project>
+  <Target Name="Target" AfterTargets="Build">
+      <Message Text="Assignment" Importance="high" />
+  </Target>
+</Project>
