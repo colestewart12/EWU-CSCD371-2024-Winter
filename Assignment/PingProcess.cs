@@ -44,7 +44,7 @@ public class PingProcess
         if (cancellationToken.IsCancellationRequested)
         {
             TaskCanceledException t = new TaskCanceledException();
-            AggregateException a = new AggregateException(innerException : t);
+            AggregateException a = new AggregateException(innerExceptions : t);
             throw a;
         }
         return await Task.Run(() => Run(hostNameOrAddress));
