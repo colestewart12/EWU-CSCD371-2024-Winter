@@ -101,6 +101,26 @@ public class PingProcessTests
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrappingTaskCanceledException()
     {
         // Use exception.Flatten()
+        CancellationTokenSource cts = new CancellationTokenSource();
+        Task<PingResult> task = Sut.RunAsync("localhost", cts.Token);
+        cts.Cancel();
+        try
+        {
+            task.Wait();
+        }
+        catch (AggregateException a)
+        {
+            if(a.Flatten().InnerException != null)
+            {
+                //Ignoring null possibility because of check
+                throw a.Flatten().InnerException!;
+            }
+            else
+            {
+                Console.WriteLine("No inner exception");
+            }
+        }
+
     }
 
     [TestMethod]
