@@ -48,19 +48,23 @@ public class PingProcess
         }
         catch
         {
-            TaskCanceledException t = new TaskCanceledException();
-            AggregateException a = new AggregateException(innerExceptions: t);
+            TaskCanceledException t = new();
+            AggregateException a = new(innerExceptions: t);
             throw a;
         }
     }
 
     async public Task<PingResult> RunAsync(params string[] hostNameOrAddresses)
     {
-        StringBuilder? stringBuilder = null;
+        StringBuilder? stringBuilder = new();
         ParallelQuery<Task<int>>? all = hostNameOrAddresses.AsParallel().Select(async item =>
         {
             Task<PingResult> task = null!;
-            // ...
+            PingResult result = await RunAsync(item);
+            lock (stringBuilder)
+            {
+                stringBuilder.AppendLine(result.StdOutput);
+            }
 
             await task.WaitAsync(default(CancellationToken));
             return task.Result.ExitCode;

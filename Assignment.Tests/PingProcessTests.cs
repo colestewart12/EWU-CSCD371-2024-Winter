@@ -90,7 +90,7 @@ public class PingProcessTests
     [ExpectedException(typeof(AggregateException))]
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
     {
-        CancellationTokenSource cts = new CancellationTokenSource();
+        CancellationTokenSource cts = new();
         cts.Cancel();
         Task<PingResult> task = Sut.RunAsync("localhost", cts.Token);
         task.Wait();
@@ -101,7 +101,7 @@ public class PingProcessTests
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrappingTaskCanceledException()
     {
         // Use exception.Flatten()
-        CancellationTokenSource cts = new CancellationTokenSource();
+        CancellationTokenSource cts = new();
         cts.Cancel();
         Task<PingResult> task = Sut.RunAsync("localhost", cts.Token);
         try
@@ -127,7 +127,7 @@ public class PingProcessTests
     async public Task RunAsync_MultipleHostAddresses_True()
     {
         // Pseudo Code - don't trust it!!!
-        string[] hostNames = new string[] { "localhost", "localhost", "localhost", "localhost" };
+        string[] hostNames = ["localhost", "localhost", "localhost", "localhost"];
         int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length*hostNames.Length;
         PingResult result = await Sut.RunAsync(hostNames);
         int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
