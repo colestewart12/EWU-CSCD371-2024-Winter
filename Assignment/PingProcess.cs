@@ -59,15 +59,12 @@ public class PingProcess
         StringBuilder? stringBuilder = new();
         ParallelQuery<Task<int>>? all = hostNameOrAddresses.AsParallel().Select(async item =>
         {
-            Task<PingResult> task = null!;
             PingResult result = await RunAsync(item);
             lock (stringBuilder)
             {
                 stringBuilder.AppendLine(result.StdOutput);
             }
-
-            await task.WaitAsync(default(CancellationToken));
-            return task.Result.ExitCode;
+            return result.ExitCode;
         });
 
         await Task.WhenAll(all);

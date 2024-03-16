@@ -127,10 +127,15 @@ public class PingProcessTests
     async public Task RunAsync_MultipleHostAddresses_True()
     {
         // Pseudo Code - don't trust it!!!
+        //string[] hostNames = ["localhost", "localhost", "localhost", "localhost"];
+        //int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length*hostNames.Length;
+        //PingResult result = await Sut.RunAsync(hostNames);
+        //int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
+        //Assert.AreEqual(expectedLineCount, lineCount);
         string[] hostNames = ["localhost", "localhost", "localhost", "localhost"];
         int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length*hostNames.Length;
         PingResult result = await Sut.RunAsync(hostNames);
-        int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
+        int? lineCount = result.StdOutput?.Split('\n').Length;
         Assert.AreEqual(expectedLineCount, lineCount);
     }
 
