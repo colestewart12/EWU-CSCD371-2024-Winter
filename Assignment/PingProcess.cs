@@ -54,7 +54,8 @@ public class PingProcess
         }
     }
 
-    async public Task<PingResult> RunAsync(params string[] hostNameOrAddresses)
+    // Problem/task 4
+    public async Task<PingResult> RunAsync(params string[] hostNameOrAddresses)
     {
         StringBuilder? stringBuilder = new();
         ParallelQuery<Task<int>>? all = hostNameOrAddresses.AsParallel().Select(async item =>
@@ -67,8 +68,8 @@ public class PingProcess
             return result.ExitCode;
         });
 
-        await Task.WhenAll(all);
-        int total = all.Aggregate(0, (total, item) => total + item.Result);
+        await Task.WhenAll(all); //This calls the querey
+        int total = all.Aggregate(0, (total, item) => total + item.Result);//This also calls the querey
         return new PingResult(total, stringBuilder?.ToString());
     }
 
