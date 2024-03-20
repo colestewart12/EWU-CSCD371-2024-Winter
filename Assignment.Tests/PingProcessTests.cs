@@ -139,26 +139,15 @@ public class PingProcessTests
         int? lineCount = 0;
         for(int i = 0; i < extraLine.Length; i++)
         {
-            if (extraLine[i].Equals("") || extraLine[i].Length == 1) 
-            {
-                int placeholder = 0;
-                placeholder++;
-            }
+            if (extraLine[i].Equals("") || extraLine[i].Length == 1) {}
             else
             {
                 lineCount++;
             }
         }
         lineCount += hostNames.Length;
-        try
-        {
-            Assert.AreEqual(expectedLineCount, lineCount);
-        }
-        catch
-        {
-            Console.WriteLine(extraLine);
-            throw;
-        }
+        Assert.AreEqual(expectedLineCount, lineCount);
+        
     }
 
     [TestMethod]

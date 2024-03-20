@@ -69,8 +69,7 @@ public class PingProcess
             return result.ExitCode;
         });
 
-        await Task.WhenAll(all); //This calls the querey
-        //int total = all.Aggregate(0, (total, item) => total + item.Result);//This also calls the querey
+        await Task.WhenAll(all);
         int total = 0;
         return new PingResult(total, stringBuilder?.ToString());
     }
