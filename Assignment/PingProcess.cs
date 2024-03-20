@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -70,6 +71,7 @@ public class PingProcess
 
         await Task.WhenAll(all); //This calls the querey
         int total = all.Aggregate(0, (total, item) => total + item.Result);//This also calls the querey
+        //int total = 0;
         return new PingResult(total, stringBuilder?.ToString());
     }
 
