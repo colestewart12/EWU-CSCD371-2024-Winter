@@ -139,8 +139,7 @@ public class PingProcessTests
         int? lineCount = 0;
         for(int i = 0; i < extraLine.Length; i++)
         {
-            if (extraLine[i].Equals("") || extraLine[i].Length == 1) {}
-            else
+            if (!extraLine[i].Equals("") && extraLine[i].Length != 1) 
             {
                 lineCount++;
             }

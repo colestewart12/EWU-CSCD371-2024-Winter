@@ -11,11 +11,11 @@ public static class StringExtensions
     /// <summary>
     /// Returns true if the string matches the given pattern (case-insensitive).
     /// </summary>
-    /// <param name="s">The string to match</param>
+    /// <param name="inputString">The string to match</param>
     /// <param name="pattern">The pattern to match it against.</param>
     /// <returns></returns>
-    public static bool IsLikeRegEx(this string s, string pattern) =>
-        new Regex(pattern, RegexOptions.IgnoreCase).IsMatch(s);
+    public static bool IsLikeRegEx(this string inputString, string pattern) =>
+        new Regex(pattern, RegexOptions.IgnoreCase).IsMatch(inputString);
 
     /// <summary>
     /// Implement's VB's Like operator logic.
