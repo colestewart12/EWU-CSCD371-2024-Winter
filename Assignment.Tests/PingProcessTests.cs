@@ -139,7 +139,10 @@ public class PingProcessTests
         int? lineCount = 0;
         for(int i = 0; i < extraLine.Length; i++)
         {
-            if (!extraLine[i].Equals("") && extraLine[i].Length != 1) 
+#pragma warning disable CA1309 // Bot wants to use Ordinal string comparison
+                               // But like, why though? This is much easier to read
+            if (!extraLine[i].Equals("") && extraLine[i].Length != 1)
+#pragma warning restore CA1309
             {
                 lineCount++;
             }
