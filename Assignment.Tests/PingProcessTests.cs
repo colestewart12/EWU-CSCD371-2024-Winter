@@ -141,6 +141,7 @@ public class PingProcessTests
         int hostCount = 0;
         string[]? extraLines = result.StdOutput?.Split('\n');
         // This is a really ugly looking pile of spaghetti, but it does work
+        // This has the issue where the local hosts don't appear to be running in parallel
         if(extraLines is not null)
         {
             for (int i = 0; i < extraLines.Length; i++)
