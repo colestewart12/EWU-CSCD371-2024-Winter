@@ -133,50 +133,32 @@ public class PingProcessTests
         //int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
         //Assert.AreEqual(expectedLineCount, lineCount);
         string[] hostNames = ["localhost", "localhost", "localhost", "localhost"];
-        bool countLines = true;
-        string[] expectedLines = PingOutputLikeExpression.Split(Environment.NewLine);
         int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length*hostNames.Length;
         PingResult result = await Sut.RunAsync(hostNames);
+        string[] extraLine = result.StdOutput!.Split('\n');
         int? lineCount = 0;
-        int hostCount = 0;
-        string[]? extraLines = result.StdOutput?.Split('\n');
-        // This is a really ugly looking pile of spaghetti, but it does work
-        // This has the issue where the local hosts don't appear to be running in parallel
-        if(extraLines is not null)
+        for(int i = 0; i < extraLine.Length; i++)
         {
-            for (int i = 0; i < extraLines.Length; i++)
+            if (extraLine[i].Equals("") || extraLine[i].Length == 1) 
             {
-                if (countLines && hostCount < hostNames.Length)
-                {
-#pragma warning disable CS8602
-                    // Intellisense wants it to say if it doesn't contain Minimum, which I think is
-                    // less readable than what it is now
-                    if (extraLines[i].Contains("Minimum"))
-#pragma warning restore CS8602
-                    {
-                        hostCount++;
-                        countLines = false;
-                    }
-                    lineCount++;
-                }
-                else
-                {
-                    if(i != extraLines.Length -1) //Might not need this
-                    {
-                        if (extraLines[i + 1].Contains("Pinging"))
-                        {
-                            countLines = true;
-                        }
-                    }
-                }
+                int placeholder = 0;
+                placeholder++;
             }
-            lineCount--;
+            else
+            {
+                lineCount++;
+            }
         }
-        else
+        lineCount += hostNames.Length;
+        try
         {
-            throw new NullReferenceException();
+            Assert.AreEqual(expectedLineCount, lineCount);
         }
-        Assert.AreEqual(expectedLineCount, lineCount);
+        catch
+        {
+            Console.WriteLine(extraLine);
+            throw;
+        }
     }
 
     [TestMethod]
