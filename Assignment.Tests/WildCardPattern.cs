@@ -43,7 +43,16 @@ namespace IntelliTect.TestTools
     /// <summary>
     /// Represents a wildcard pattern.
     /// </summary>
-    public sealed class WildcardPattern
+    /// <remarks>
+    /// Initializes an instance of the WildcardPattern class for
+    /// the specified wildcard pattern expression, with options
+    /// that modify the pattern.
+    /// </remarks>
+    /// <param name="pattern">The wildcard pattern to match.</param>
+    /// <param name="options">Wildcard options</param>
+    /// <returns>The constructed WildcardPattern object</returns>
+    /// <remarks> if wildCardType == None, the pattern does not have wild cards  </remarks>
+    public sealed partial class WildcardPattern(string pattern, WildcardOptions options)
     {
         //
         // char that escapes special chars
@@ -58,12 +67,12 @@ namespace IntelliTect.TestTools
         //
         // wildcard pattern
         //
-        internal string Pattern { get; }
+        internal string Pattern { get; } = pattern ?? throw new ArgumentNullException(nameof(pattern));
 
         //
         // options that control match behavior
         //
-        internal WildcardOptions Options { get; } = WildcardOptions.None;
+        internal WildcardOptions Options { get; } = options;
 
         /// <summary>
         /// wildcard pattern converted to regex pattern.
@@ -100,21 +109,6 @@ namespace IntelliTect.TestTools
         public WildcardPattern(string pattern, char escapeCharacter) :
             this(pattern, escapeCharacter, WildcardOptions.None)
         { }
-
-        /// <summary>
-        /// Initializes an instance of the WildcardPattern class for
-        /// the specified wildcard pattern expression, with options
-        /// that modify the pattern.
-        /// </summary>
-        /// <param name="pattern">The wildcard pattern to match.</param>
-        /// <param name="options">Wildcard options</param>
-        /// <returns>The constructed WildcardPattern object</returns>
-        /// <remarks> if wildCardType == None, the pattern does not have wild cards  </remarks>
-        public WildcardPattern(string pattern, WildcardOptions options)
-        {
-            Pattern = pattern ?? throw new ArgumentNullException(nameof(pattern));
-            Options = options;
-        }
 
         /// <summary>
         /// Initializes an instance of the WildcardPattern class for
@@ -164,8 +158,7 @@ namespace IntelliTect.TestTools
         /// <returns></returns>
         public static WildcardPattern Get(string pattern, WildcardOptions options)
         {
-            if (pattern == null)
-                throw new ArgumentNullException(nameof(pattern));
+            ArgumentNullException.ThrowIfNull(pattern);
 
             if (pattern.Length == 1 && pattern[0] == '*')
                 return s_matchAllIgnoreCasePattern;
@@ -223,15 +216,8 @@ namespace IntelliTect.TestTools
         {
 #pragma warning disable 56506
 
-            if (pattern == null)
-            {
-                throw new ArgumentNullException(nameof(pattern));
-            }
-
-            if (charsNotToEscape == null)
-            {
-                throw new ArgumentNullException(nameof(charsNotToEscape));
-            }
+            ArgumentNullException.ThrowIfNull(pattern);
+            ArgumentNullException.ThrowIfNull(charsNotToEscape);
 
             char[] temp = new char[(pattern.Length * 2) + 1];
             int tempIndex = 0;
@@ -274,7 +260,7 @@ namespace IntelliTect.TestTools
         public static string Escape(
             string pattern, char escapeCharacter)
         {
-            return Escape(pattern, Array.Empty<char>(), escapeCharacter);
+            return Escape(pattern, [], escapeCharacter);
         }
 
         /// <summary>
@@ -335,10 +321,7 @@ namespace IntelliTect.TestTools
         public static string Unescape(
             string pattern, char escapeCharacter)
         {
-            if (pattern == null)
-            {
-                throw new ArgumentNullException(nameof(pattern));
-            }
+            ArgumentNullException.ThrowIfNull(pattern);
 
             char[] temp = new char[pattern.Length];
             int tempIndex = 0;
@@ -408,15 +391,18 @@ namespace IntelliTect.TestTools
         public static string NormalizeLineEndings(string input, bool trimTrailingNewline = false)
         {
             // https://stackoverflow.com/questions/140926/normalize-newlines-in-c-sharp
-            input = Regex.Replace(input, @"\r\n|\n\r|\n|\r", Environment.NewLine);
+            input = MyRegex().Replace(input, Environment.NewLine);
 
             if (trimTrailingNewline && input.EndsWith(Environment.NewLine))
             {
-                input = input.Substring(0, input.Length - Environment.NewLine.Length);
+                input = input[..^Environment.NewLine.Length];
             }
 
             return input;
         }
+
+        [GeneratedRegex(@"\r\n|\n\r|\n|\r")]
+        private static partial Regex MyRegex();
     }
 
     /// <summary>
@@ -623,7 +609,7 @@ namespace IntelliTect.TestTools
             {
                 if (!pattern.Pattern.Equals($"{pattern.EscapeCharacter}", StringComparison.Ordinal)) // Win7 backcompatibility requires treating '`' pattern as '' pattern when this code was used with PowerShell.
                 {
-                    parser.AppendLiteralCharacter(pattern.Pattern[pattern.Pattern.Length - 1]);
+                    parser.AppendLiteralCharacter(pattern.Pattern[^1]);
                 }
             }
 
@@ -878,9 +864,7 @@ namespace IntelliTect.TestTools
 
                 // swap patternPositionsForCurrentStringPosition
                 // with patternPositionsForNextStringPosition
-                var tmp = patternPositionsForCurrentStringPosition;
-                patternPositionsForCurrentStringPosition = patternPositionsForNextStringPosition;
-                patternPositionsForNextStringPosition = tmp;
+                (patternPositionsForNextStringPosition, patternPositionsForCurrentStringPosition) = (patternPositionsForCurrentStringPosition, patternPositionsForNextStringPosition);
             }
 
             while (patternPositionsForCurrentStringPosition.MoveNext(out int patternPosition2))
@@ -1021,14 +1005,9 @@ namespace IntelliTect.TestTools
             }
         }
 
-        private class LiteralCharacterElement : QuestionMarkElement
+        private class LiteralCharacterElement(char literalCharacter) : QuestionMarkElement
         {
-            private readonly char _literalCharacter;
-
-            public LiteralCharacterElement(char literalCharacter)
-            {
-                _literalCharacter = literalCharacter;
-            }
+            private readonly char _literalCharacter = literalCharacter;
 
             public override void ProcessStringCharacter(
                             char currentStringCharacter,
@@ -1047,14 +1026,9 @@ namespace IntelliTect.TestTools
             }
         }
 
-        private class BracketExpressionElement : QuestionMarkElement
+        private class BracketExpressionElement(Regex regex) : QuestionMarkElement
         {
-            private readonly Regex _Regex;
-
-            public BracketExpressionElement(Regex regex)
-            {
-                _Regex = regex ?? throw new ArgumentNullException(nameof(regex));
-            }
+            private readonly Regex _Regex = regex ?? throw new ArgumentNullException(nameof(regex));
 
             public override void ProcessStringCharacter(
                             char currentStringCharacter,
@@ -1097,7 +1071,7 @@ namespace IntelliTect.TestTools
 
         private class MyWildcardPatternParser : WildcardPatternParser
         {
-            private readonly List<PatternElement> _patternElements = new();
+            private readonly List<PatternElement> _patternElements = [];
             private CharacterNormalizer _characterNormalizer;
             private RegexOptions _regexOptions;
             private StringBuilder _bracketExpressionBuilder;
@@ -1112,7 +1086,7 @@ namespace IntelliTect.TestTools
                     _regexOptions = WildcardPatternToRegexParser.TranslateWildcardOptionsIntoRegexOptions(pattern.Options),
                 };
                 WildcardPatternParser.Parse(pattern, parser);
-                return parser._patternElements.ToArray();
+                return [.. parser._patternElements];
             }
 
             protected override void AppendLiteralCharacter(char c)
@@ -1162,7 +1136,7 @@ namespace IntelliTect.TestTools
             }
         }
 
-        private struct CharacterNormalizer
+        private readonly struct CharacterNormalizer
         {
             private readonly CultureInfo _cultureInfo;
             private readonly bool _caseInsensitive;
