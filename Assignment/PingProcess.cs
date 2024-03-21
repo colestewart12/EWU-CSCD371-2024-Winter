@@ -66,6 +66,7 @@ public class PingProcess
             {
                 stringBuilder.AppendLine(result.StdOutput);
             }
+            await task.WaitAsync(default(CancellationToken));
             return result.ExitCode;
         });
 
